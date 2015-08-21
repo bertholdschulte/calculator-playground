@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class CalculationExecutor {
 
 
-    private static final Logger logger = LogManager.getLogger(CalculationExecutor.class);
+    private static final Logger LOGGER = LogManager.getLogger(CalculationExecutor.class);
     
     private Map<String, QueryEvaluator> evaluators;
 
@@ -38,8 +38,8 @@ public class CalculationExecutor {
 		}
 		String questionType = matcher.group(1);
 		String questionValues = matcher.group(2);
-		logger.debug("Question Type: {}", questionType);
-		logger.debug("Question Value: {}",questionValues);
+		LOGGER.debug("Question Type: {}", questionType);
+		LOGGER.debug("Question Value: {}",questionValues);
 		if (evaluators.get(questionType) != null) {
 			return evaluators.get(questionType).evaluate(questionValues);
 		} else {

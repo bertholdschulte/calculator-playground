@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CalculatorService {
 
-	private static final Logger logger = LogManager.getLogger(CalculatorService.class);
+	private static final Logger LOGGER = LogManager.getLogger(CalculatorService.class);
     
 	@Autowired
 	private CalculationExecutor executor;
@@ -32,7 +32,7 @@ public class CalculatorService {
 		try {
 			q = URLDecoder.decode(query,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			logger.fatal(e);
+			LOGGER.fatal(e);
 		}
 		return executor.calculate(q);
 	}
