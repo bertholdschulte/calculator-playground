@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bschulte.calculator.evaluator.QueryEvaluator;
 import org.bschulte.calculator.evaluator.WhatIsEvaluator;
 import org.bschulte.calculator.evaluator.WhichOfBothEvaluator;
@@ -14,7 +16,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CalculationExecutor {
 
-	private Map<String, QueryEvaluator> evaluators;
+
+    private static final Logger logger = LogManager.getLogger(CalculationExecutor.class);
+    
+    private Map<String, QueryEvaluator> evaluators;
 
 	public CalculationExecutor() {
 		evaluators = new HashMap<String, QueryEvaluator>();
@@ -33,7 +38,8 @@ public class CalculationExecutor {
 		}
 		String questionType = matcher.group(1);
 		String questionValues = matcher.group(2);
-		
+		logger.debug("Question Type: {}", questionType);
+		logger.debug("Question Value: {}",questionValues);
 		if (evaluators.get(questionType) != null) {
 			return evaluators.get(questionType).evaluate(questionValues);
 		} else {
