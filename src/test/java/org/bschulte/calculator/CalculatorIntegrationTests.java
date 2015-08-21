@@ -10,6 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * 
+ * Intgration tests to check request mapping
+ * 
+ * @author bschulte
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
 @WebIntegrationTest()
