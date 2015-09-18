@@ -20,7 +20,7 @@ public class CalculatorIntegrationTests {
 	
 	@Test
 	public void testApp() {
-		ResponseEntity<String> result = restTemplate.getForEntity("http://localhost:80?q=what%20is%2023%20plus%205%20multiplied%20by%2011", String.class);
+		ResponseEntity<String> result = restTemplate.getForEntity("http://localhost:8080?q=what%20is%2023%20plus%205%20multiplied%20by%2011", String.class);
 		Assert.assertEquals("78",result.getBody());
 	}
 	
