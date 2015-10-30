@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CalculatorService {
 
+	private static final String MSG_QUESTION_NOT_KNOWN = "Sorry, I do not understand your question.";
+
+	protected static final String MSG_QUESTION_NOT_PROVIDED = "Please provide a question in parameter: q";
+
 	private static final Logger LOGGER = LogManager.getLogger(CalculatorService.class);
     
 	@Autowired
@@ -26,7 +30,7 @@ public class CalculatorService {
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String calculate(@RequestParam(name = "q", required = false) String query) throws UnknownQuestionException {
 		if (StringUtils.isEmpty(query)) {
-			return "Please provide a question in parameter: q";
+			return MSG_QUESTION_NOT_PROVIDED;
 		}
 		String q = null;
 		try {
@@ -40,7 +44,7 @@ public class CalculatorService {
 	@ExceptionHandler(UnknownQuestionException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public String unknownQuestion() {
-		return "Sorry, I do not understand your question.";
+		return MSG_QUESTION_NOT_KNOWN;
 	}
 	
 }

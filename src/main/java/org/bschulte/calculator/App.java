@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 class App {
 
-	private App() {
+	public App() {
 
 	}
 

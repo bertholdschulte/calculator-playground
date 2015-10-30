@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * 
- * Intgration tests to check request mapping
+ * Integration tests to check request mapping
  * 
  * @author bschulte
  *
