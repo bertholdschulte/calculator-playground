@@ -25,7 +25,11 @@ public class CalculatorService {
 	private static final Logger LOGGER = LogManager.getLogger(CalculatorService.class);
     
 	@Autowired
+
 	private CalculationExecutor executor;
+	
+	@Autowired
+	private QuestionsRepository repository;
 
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String calculate(@RequestParam(name = "q", required = false) String query) throws UnknownQuestionException {
@@ -38,7 +42,14 @@ public class CalculatorService {
 		} catch (UnsupportedEncodingException e) {
 			LOGGER.fatal(e);
 		}
+
+		Question question = new Question();
+		question.setQuestion(q);
+		repository.save(question);
+		System.out.println(question.getId());
+		System.out.println(repository.findOne(4l)!=null?repository.findOne(4l).getQuestion():"na");
 		return executor.calculate(q);
+
 	}
 
 	@ExceptionHandler(UnknownQuestionException.class)
