@@ -24,7 +24,7 @@ public class CalculatorService {
 	private CalculationExecutor executor;
 
 	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String calculate(@RequestParam(name = "q", required = false) String query) throws UnknownQuestionException {
+	public String calculate(@RequestParam(name = "q", required = false) String query) throws UnknownQuestionException, CalculationException {
 		if (StringUtils.isEmpty(query)) {
 			return "Please provide a question in parameter: q";
 		}
@@ -41,6 +41,12 @@ public class CalculatorService {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public String unknownQuestion() {
 		return "Sorry, I do not understand your question.";
+	}
+	
+	@ExceptionHandler(CalculationException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public String calculationIssue() {
+		return "I cannot execute your question, please check your given operators and values.";
 	}
 	
 }

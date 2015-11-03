@@ -11,6 +11,7 @@ import org.bschulte.calculator.evaluator.QueryEvaluator;
 import org.bschulte.calculator.evaluator.WhatIsEvaluator;
 import org.bschulte.calculator.evaluator.WhichOfBothEvaluator;
 import org.bschulte.calculator.evaluator.WhichOfLargestEvaluator;
+import org.springframework.expression.spel.SpelParseException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +29,7 @@ public class CalculationExecutor {
 		evaluators.put(new WhichOfBothEvaluator().getQueryType(), new WhichOfBothEvaluator());
 	}
 
-	public String calculate(String query) throws UnknownQuestionException {
+	public String calculate(String query) throws UnknownQuestionException, CalculationException {
 		
 		Pattern p = Pattern.compile("(\\D+)\\s(.*)");
 		Matcher matcher = p.matcher(query);
@@ -41,7 +42,11 @@ public class CalculationExecutor {
 		LOGGER.debug("Question Type: {}", questionType);
 		LOGGER.debug("Question Value: {}",questionValues);
 		if (evaluators.get(questionType) != null) {
+			try{
 			return evaluators.get(questionType).evaluate(questionValues);
+			}catch(ArithmeticException|SpelParseException e){
+				throw new CalculationException(e.getMessage());
+			}
 		} else {
 			throw new UnknownQuestionException();
 		}

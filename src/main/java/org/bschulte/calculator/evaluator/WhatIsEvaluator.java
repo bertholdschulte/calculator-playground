@@ -11,7 +11,7 @@ public class WhatIsEvaluator implements QueryEvaluator  {
 
 	@Override
 	public String evaluate(String query){
-		return expression(query.replace("plus", "+").replace("multiplied by", "*"));
+		return expression(query.replace("plus", "+").replace("multiplied by", "*").replace("devided by", "/").replace("modulus","%").replace("power", "^"));
 	}
 	
 	@Override
