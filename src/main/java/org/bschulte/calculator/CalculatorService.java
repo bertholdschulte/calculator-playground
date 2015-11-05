@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CalculatorService {
 
+	private static final String MSG_QUESTION_ISSUE = "I cannot execute your question, please check your given operators and values.";
+
 	private static final String MSG_QUESTION_NOT_KNOWN = "Sorry, I do not understand your question.";
 
 	protected static final String MSG_QUESTION_NOT_PROVIDED = "Please provide a question in parameter: q";
@@ -50,7 +52,7 @@ public class CalculatorService {
 	@ExceptionHandler(CalculationException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public String calculationIssue() {
-		return "I cannot execute your question, please check your given operators and values.";
+		return MSG_QUESTION_ISSUE;
 	}
 	
 }
