@@ -38,7 +38,7 @@ public class CalculatorService {
 		try {
 			q = URLDecoder.decode(query,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			LOGGER.error("URLDecoder", e);
+			LOGGER.error("URLDecoding", e);
 		}
 		return executor.calculate(q);
 	}
