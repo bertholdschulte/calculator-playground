@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.bschulte.calculator.evaluator.QueryEvaluator;
 import org.bschulte.calculator.evaluator.WhatIsEvaluator;
 import org.bschulte.calculator.evaluator.WhichOfBothEvaluator;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class CalculationExecutor {
 
 
-    private static final Logger LOGGER = LogManager.getLogger(CalculationExecutor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CalculationExecutor.class);
     
     private Map<String, QueryEvaluator> evaluators;
 

@@ -3,8 +3,8 @@ package org.bschulte.calculator;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
@@ -24,7 +24,7 @@ public class CalculatorService {
 
 	protected static final String MSG_QUESTION_NOT_PROVIDED = "Please provide a question in parameter: q";
 
-	private static final Logger LOGGER = LogManager.getLogger(CalculatorService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CalculatorService.class);
     
 	@Autowired
 	private CalculationExecutor executor;
@@ -38,7 +38,7 @@ public class CalculatorService {
 		try {
 			q = URLDecoder.decode(query,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			LOGGER.fatal(e);
+			LOGGER.error("URLDecoder", e);
 		}
 		return executor.calculate(q);
 	}
